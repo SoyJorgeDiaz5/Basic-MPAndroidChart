@@ -32,26 +32,16 @@ public class MainActivity extends AppCompatActivity {
         setChartDescription();
     }
 
-    private void setChartDescription() {
-        Description description = new Description();
-        description.setText("Algunos participantes del torneo");
-        description.setTextSize(15);
-        pieChart.setDescription(description);
-    }
-
-    private void setPieData() {
-        PieData pieData = new PieData(dataSet);
-        pieData.setValueTextSize(10f);
-        pieData.setValueTextColor(Color.BLACK);
-        pieChart.setData(pieData);
-    }
-
-    private void setDataSet() {
-        dataSet = new PieDataSet(yValues, "");
-        dataSet.setValueFormatter(new PercentFormatter(pieChart));
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+    private void setPieChart() {
+        pieChart = findViewById(R.id.pie_chart);
+        pieChart.setUsePercentValues(true);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(0.15f);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.animateY(1000, Easing.EaseInOutCubic);
+        pieChart.setEntryLabelColor(Color.BLACK);
     }
 
     private void setValues() {
@@ -63,15 +53,25 @@ public class MainActivity extends AppCompatActivity {
         yValues.add(new PieEntry(12.5f, "Venezuela"));
     }
 
-    private void setPieChart() {
-        pieChart = findViewById(R.id.pie_chart);
-        pieChart.setUsePercentValues(true);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.15f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        pieChart.animateY(1000, Easing.EaseInOutCubic);
-        pieChart.setEntryLabelColor(Color.BLACK);
+    private void setDataSet() {
+        dataSet = new PieDataSet(yValues, "");
+        dataSet.setValueFormatter(new PercentFormatter(pieChart));
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+    }
+
+    private void setPieData() {
+        PieData pieData = new PieData(dataSet);
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.BLACK);
+        pieChart.setData(pieData);
+    }
+
+    private void setChartDescription() {
+        Description description = new Description();
+        description.setText("Algunos participantes del torneo");
+        description.setTextSize(15);
+        pieChart.setDescription(description);
     }
 }
